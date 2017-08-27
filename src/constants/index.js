@@ -36,8 +36,8 @@ export const CATEGORY_ORDER = [
 ]
 
 export const media = {
-  desktop: '@media only screen and (min-width: 768px)',
-  phone: '@media only screen and (max-width: 767px)',
+  desktop: '@media only screen and (min-width: 1224px)',
+  tablet: '@media only screen and (min-width: 768px)',
   portrait: '@media only screen and (max-width: 767px) and (orientation: portrait)'
 }
 
@@ -55,7 +55,7 @@ export const backgrounds = {
     radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
     radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px),
     radial-gradient(rgba(255,255,255,.4), rgba(255,255,255,.1) 2px, transparent 30px);
-    background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px; 
+    background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px;
     background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;`
 }
 

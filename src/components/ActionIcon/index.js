@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 const StyledIcon = styled.img`
-  height: 64px;
-  width: 64px;
+  max-width: 100%;
+  min-height: fill-available;
   border-radius: 7px;
   box-shadow: 2px 2px 3px rgba(0,0,0,0.4);
 `
