@@ -5,6 +5,9 @@ import { action } from '@storybook/addon-actions'
 import { withInfo } from '@storybook/addon-info';
 
 import Hotbar from '../Hotbar'
+import ActionSlot from '../ActionSlot'
+import ActionTooltip from '../ActionTooltip'
+import ActionIcon from '../ActionIcon'
 
 const emptyHotbar = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}]
 
@@ -31,13 +34,36 @@ const sparseHotbar = [
   {}
 ]
 
+const renderActions = () => {
+  return sparseHotbar.map((action, index) => (
+    <ActionSlot key={`action-slot-1-${index}`}>
+      {action.icon && (
+        <ActionTooltip description={action.tooltip} cast={action.cast} recast={action.recast} name={action.name}>
+          <ActionIcon icon={action.icon} draggable={action.draggable} />
+        </ActionTooltip>
+      )}
+    </ActionSlot>
+  ))
+}
+
 storiesOf('Hotbars', module)
-  .add('Empty Horizontal Hotbar', withInfo()(() =>
-    <Hotbar actions={emptyHotbar} barNumber={1}/>
+  .add('Horizontal Hotbar', withInfo()(() =>
+    <Hotbar barNumber={1} width={12}>
+      {renderActions()}
+    </Hotbar>
   ))
-  .add('Empty Vertical Hotbar', withInfo()(() =>
-    <Hotbar actions={emptyHotbar} barNumber={1} vertical/>
+  .add('Stacked Horizontal Hotbar', withInfo()(() =>
+    <Hotbar barNumber={1} width={6}>
+      {renderActions()}
+    </Hotbar>
   ))
-  .add('Sparse Horizontal Hotbar', withInfo()(() =>
-    <Hotbar actions={sparseHotbar} barNumber={1}/>
+  .add('Vertical Hotbar', withInfo()(() =>
+    <Hotbar barNumber={1} width={1}>
+      {renderActions()}
+    </Hotbar>
+  ))
+  .add('Stacked vertical Hotbar', withInfo()(() =>
+    <Hotbar barNumber={1} width={2}>
+      {renderActions()}
+    </Hotbar>
   ))

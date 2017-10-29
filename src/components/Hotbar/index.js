@@ -6,56 +6,42 @@ import styled from 'styled-components'
 import ActionSlot from '../ActionSlot'
 import ActionIcon from '../ActionIcon'
 import ActionTooltip from '../ActionTooltip'
+import { media } from '../../constants'
 
-const VerticalHotbar = styled.div`
+const Bar = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+
+  ${media.tablet} {
+    width: ${({width}) => `${(408 * (width / 12))}px`};
+  }
+  ${media.desktop} {
+    width: ${({width}) => `${(624 * (width / 12))}px`};
+  }
+
 `
 
-const HorizontalHotbar = styled.div`
-  display: flex;
-`
 export default class Hotbar extends React.PureComponent {
 
   static propTypes = {
     /**
-     * Whether or not the bar is vertical
+     * Number of rows in the hotbar
      */
-    vertical: PropTypes.bool,
-    /**
-     * Which Bar this hotbar represents.
-     */
-    barNumber: PropTypes.number,
-    /**
-     * The sparse array of actions. Should always contain 12 elements.
-     */
-    actions: (props, propName, componentName) => {
-      if (!(props[propName] instanceof Array && props[propName].length === 12)) {
-        return new Error(
-          'Invalid prop `' + propName + '` supplied to' +
-          ' `' + componentName + '`. Validation failed. Should be an array of 12 elements.'
-        );
-      }
-    }
+    width: PropTypes.oneOf([1, 2, 6, 12]),
+    children: PropTypes.arrayOf(PropTypes.shape({
+      type: PropTypes.oneOf([ActionSlot])
+    }))
   }
+
+  static defaultProps = {
+    height: 1
+  }
+
   render() {
 
-    const Bar = (this.props.vertical) ? VerticalHotbar : HorizontalHotbar
-
     return (
-      <Bar>
-        {this.props.actions && this.props.actions.map((action, index) => {
-
-          return (
-            <ActionSlot key={`action-slot-${this.props.barNumber}-${index}`}>
-              {action.icon && (
-                <ActionTooltip description={action.tooltip} cast={action.cast} recast={action.recast} name={action.name}>
-                  <ActionIcon icon={action.icon} draggable={action.draggable} />
-                </ActionTooltip>
-              )}
-            </ActionSlot>
-          )
-        })}
+      <Bar width={this.props.width}>
+        {this.props.children}
       </Bar>
     )
   }
