@@ -31,7 +31,7 @@ export default class ActionSlot extends React.Component {
   }
   render() {
     return (
-      <Container>
+      <Container draggable={false}>
         {this.props.children}
       </Container>
     )
